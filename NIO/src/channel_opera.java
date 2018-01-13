@@ -1,6 +1,7 @@
 import java.io.*;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
+import java.nio.channels.Channel;
 import java.nio.channels.FileChannel;
 import java.util.Scanner;
 
@@ -58,5 +59,33 @@ public class channel_opera {
         fout.close();
         inputStream.close();
         outputStream.close();
+    }
+
+    //通道之间的数据传递
+    //将数据从源通道传输到FileChannel中
+    void mytrasnform() throws Exception
+    {
+        File file =new File("1.txt");
+        File file2 = new File("2.txt");
+        FileOutputStream outputStream1 =new FileOutputStream(file);
+        FileInputStream inputStream = new FileInputStream(file2);
+        FileChannel fromChannel =outputStream1.getChannel();
+        FileChannel toChannel  =inputStream.getChannel();
+        long position = 0;
+        long count = fromChannel.size();
+        toChannel.transferFrom(fromChannel,position,count);
+    }
+
+    void  mytransto() throws  Exception
+    {
+        File file =new File("1.txt");
+        File file2 = new File("2.txt");
+        FileOutputStream outputStream1 =new FileOutputStream(file);
+        FileInputStream inputStream = new FileInputStream(file2);
+        FileChannel fromChannel =outputStream1.getChannel();
+        FileChannel toChannel  =inputStream.getChannel();
+        long position = 0;
+        long count = fromChannel.size();
+        fromChannel.transferTo(position,count,toChannel);
     }
 }

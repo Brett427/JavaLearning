@@ -1,4 +1,10 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.nio.channels.Channel;
+import java.nio.channels.FileChannel;
 
 public class buffer_opera {
 
@@ -33,6 +39,20 @@ public class buffer_opera {
         }
         //输出了 5 7 9
     }
+    //通过flip()方法将Buffer从写模式切换到读模式。在读模式下，可以读取之前写入到buffer的所有数据。
+
+    //往buffer中写数据的两种方式
+    void write() throws Exception
+    {
+        File f = new File("1.txt");
+        FileOutputStream fileOutputStream =new FileOutputStream(f);
+        FileChannel channel =fileOutputStream.getChannel();
+        ByteBuffer byteBuffer =ByteBuffer.allocate(48);
+        channel.read(byteBuffer);//   往buffer中写数据
+        //或者第二种方法,直接put
+        //byteBuffer.put();
+    }
+
 
     //创建子缓冲区
     void zihuanchongqu()
