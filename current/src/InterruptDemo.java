@@ -1,3 +1,6 @@
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
+
 public class InterruptDemo {
     public static class Thread3 extends Thread{
         public void run(){
@@ -18,5 +21,6 @@ public class InterruptDemo {
         t.interrupt();
         System.out.println(Thread.interrupted());
         //Thread.interrupted()等于 Thread.currentThread().isInterrupted().
+//        FutureTask
     }
 }
