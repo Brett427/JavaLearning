@@ -1,8 +1,11 @@
 import redis.clients.jedis.Jedis;
 
+import java.io.FileWriter;
+
 public class StringExample {
     public static void main(String[] args) {
         Jedis jedis = new Jedis("127.0.0.1", 6379);
+
         jedis.set("key", "Hello World!");
         String value = jedis.get("key");
         System.out.println(value);
